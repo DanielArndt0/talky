@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1008148447720",
+    "project_id": "talkychat-56d97",
+    "storage_bucket": "talkychat-56d97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008148447720:android:3c71fa2420d47fb9ab645d",
+        "android_client_info": {
+          "package_name": "com.example.talky_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008148447720-ijs7lvr9mn41iro9v7aknumh9djgml05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDtLJvtnsATD3oqc6qz2r1X7eiapDZnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008148447720-ijs7lvr9mn41iro9v7aknumh9djgml05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
