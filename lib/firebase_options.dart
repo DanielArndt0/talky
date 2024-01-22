@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:talky_chat/Env.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -35,32 +36,31 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBLmhuZX7eX0NxETIlFGTTAvB8MqW2eZS4',
-    appId: '1:1008148447720:web:ec19db0a01a50be1ab645d',
-    messagingSenderId: '1008148447720',
-    projectId: 'talkychat-56d97',
-    authDomain: 'talkychat-56d97.firebaseapp.com',
-    storageBucket: 'talkychat-56d97.appspot.com',
-    measurementId: 'G-H57JL16GVC',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: Env.web.apiKey,
+    appId: Env.web.appId,
+    messagingSenderId: Env.messagingSenderId,
+    projectId: Env.projectId,
+    authDomain: Env.web.authDomain,
+    storageBucket: Env.storageBucket,
+    measurementId: Env.web.measurementId,
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAkDtLJvtnsATD3oqc6qz2r1X7eiapDZnY',
-    appId: '1:1008148447720:android:3c71fa2420d47fb9ab645d',
-    messagingSenderId: '1008148447720',
-    projectId: 'talkychat-56d97',
-    storageBucket: 'talkychat-56d97.appspot.com',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: Env.android.apiKey,
+    appId: Env.android.appId,
+    messagingSenderId: Env.messagingSenderId,
+    projectId: Env.projectId,
+    storageBucket: Env.storageBucket,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDEuDJGhe8LPZtWIug7sSSd9nsIG-xzdSQ',
-    appId: '1:1008148447720:ios:7ee9bc2521e6a155ab645d',
-    messagingSenderId: '1008148447720',
-    projectId: 'talkychat-56d97',
-    storageBucket: 'talkychat-56d97.appspot.com',
-    iosClientId:
-        '1008148447720-8kgq53odr2q6r0anff8scb18f778t7p4.apps.googleusercontent.com',
-    iosBundleId: 'com.example.talkyChat',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: Env.ios.apiKey,
+    appId: Env.ios.appId,
+    messagingSenderId: Env.messagingSenderId,
+    projectId: Env.projectId,
+    storageBucket: Env.storageBucket,
+    iosClientId: Env.ios.clientId,
+    iosBundleId: Env.ios.bundleId,
   );
 }

@@ -5,6 +5,7 @@ import 'package:talky_chat/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(providerHandler);
 }
