@@ -1,3 +1,5 @@
+import 'package:talky_chat/Errors/EnvironmentException.dart';
+
 class _Labels {
   static const String projectId = 'projectId';
   static const String messagingSenderId = 'messagingSenderId';
@@ -35,7 +37,7 @@ class Env {
   static String get(String key) {
     final val = _keys[key] ?? '';
     if (val.isEmpty) {
-      throw Exception('$key is no set in Env');
+      throw EnvironmentException(code: key, message: '$key is no set in Env');
     }
     return val;
   }

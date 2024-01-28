@@ -10,8 +10,8 @@ class SignInSocialScreenControllerImpl extends SignInSocialScreenController {
   final BuildContext context;
   final NavigatorController navigatorController;
   final CurrentUserProvider currentUser;
-  final AuthService authService;
-  final CloudDBService CDBService;
+  final AuthService authService; // TODO authService
+  final CloudDBService CDBService; // TODO CDBService
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -33,24 +33,24 @@ class SignInSocialScreenControllerImpl extends SignInSocialScreenController {
   // TODO: Retornar esta future
   void onUserValidation() {
     if (_state) {
-      authService
-          .signInUser(
-        email: _emailController.text,
-        password: _passwordController.text,
-      )
-          .then((userCredential) {
-        currentUser.updateUserCredential(userCredential);
-        CDBService.refreshUser().then((user) {
-          if (currentUser.localUser.isNewUser) {
-            navigatorController.goToProfile();
-          } else {
-            navigatorController.goToChats();
-          }
-        });
-      }).onError((error, stackTrace) {
-        error as FirebaseException;
-        navigatorController.showSnackbar(error.message!);
-      });
+      // authService
+      //     .signInUser(
+      //   email: _emailController.text,
+      //   password: _passwordController.text,
+      // )
+      //     .then((userCredential) {
+      //   currentUser.updateUserCredential(userCredential);
+      //   CDBService.refreshUser().then((user) {
+      //     if (currentUser.localUser.isNewUser) {
+      //       navigatorController.goToProfile();
+      //     } else {
+      //       navigatorController.goToChats();
+      //     }
+      //   });
+      // }).onError((error, stackTrace) {
+      //   error as FirebaseException;
+      //   navigatorController.showSnackbar(error.message!);
+      // });
     }
   }
 

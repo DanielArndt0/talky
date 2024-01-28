@@ -20,7 +20,7 @@
       "flutterMode": "profile",
       "args": [
         "--dart-define-from-file",
-        "env/env.dev.json"
+        "env/env.qa.json"
       ]
     },
     {
@@ -30,7 +30,7 @@
       "flutterMode": "release",
       "args": [
         "--dart-define-from-file",
-        "env/env.dev.json"
+        "env/env.prd.json"
       ]
     }
   ]

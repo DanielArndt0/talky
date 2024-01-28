@@ -13,7 +13,7 @@ class ProfileScreenControllerImpl extends ProfileScreenController {
   final CurrentUserProvider currentUser;
   final NavigatorController navigatorController;
   final MediaPickerService mediaPickerService;
-  final CloudDBService CDBService;
+  final CloudDBService CDBService; // TODO CDBService
   final TextEditingController _statusController = TextEditingController();
   late AvailabilityStatus _availabilityController;
   final _formKey = GlobalKey<FormState>();
@@ -45,18 +45,18 @@ class ProfileScreenControllerImpl extends ProfileScreenController {
   // TODO: Retornar esta future
   void onValidate() {
     if (_state) {
-      currentUser.update(
-        status: status.text,
-        availabilityStatus: availability,
-        isNewUser: false,
-      );
-      CDBService.updateUser().then((value) {
-        navigatorController.goToChats();
-      }).onError((error, stackTrace) {
-        error as FirebaseAuthException;
-        navigatorController.showSnackbar(error.message!);
-        navigatorController.goToChats();
-      });
+      // currentUser.update(
+      //   status: status.text,
+      //   availabilityStatus: availability,
+      //   isNewUser: false,
+      // );
+      // CDBService.updateUser().then((value) {
+      //   navigatorController.goToChats();
+      // }).onError((error, stackTrace) {
+      //   error as FirebaseAuthException;
+      //   navigatorController.showSnackbar(error.message!);
+      //   navigatorController.goToChats();
+      // });
     }
   }
 

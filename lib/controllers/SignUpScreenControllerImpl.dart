@@ -2,9 +2,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:talky_chat/controllers/AuthControllerImpl.dart';
 import 'package:talky_chat/controllers/interfaces/NavigatorController.dart';
 import 'package:talky_chat/controllers/interfaces/SignUpScreenController.dart';
 import 'package:talky_chat/providers/CurrentUserProvider.dart';
+import 'package:talky_chat/services/FirebaseAuthService.dart';
+import 'package:talky_chat/services/FirestoreDBService.dart';
 import 'package:talky_chat/services/interfaces/AuthService.dart';
 import 'package:talky_chat/services/interfaces/CloudDBService.dart';
 
@@ -12,8 +15,8 @@ class SignUpScreenControllerImpl extends SignUpScreenController {
   final BuildContext context;
   final NavigatorController navigatorController;
   final CurrentUserProvider currentUser;
-  final AuthService authService;
-  final CloudDBService CDBService;
+  final AuthService authService; // TODO authService
+  final CloudDBService CDBService; // TODO CDBService
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,6 +30,12 @@ class SignUpScreenControllerImpl extends SignUpScreenController {
     required this.CDBService,
   });
 
+  final AuthControllerImpl authController = AuthControllerImpl(
+    authService: FirebaseAuthService.instance,
+    cloudDBService: FirestoreDBService(currentUser: CurrentUserProvider()),
+    currentUser: CurrentUserProvider(),
+  ); // TODO remove
+
   bool get _state => _formKey.currentState!.validate();
 
   @override
@@ -36,15 +45,21 @@ class SignUpScreenControllerImpl extends SignUpScreenController {
   // TODO: Retornar esta future
   void onUserValidation() {
     if (_state) {
-      auth().then((credential) {
-        register(credential)
-            .then((value) => navigatorController.goToProfile())
-            .onError((error, stackTrace) {
-          _showError(error);
-        });
-      }).onError((error, stackTrace) {
-        _showError(error);
-      });
+      authController.register(
+        email: _emailController.text,
+        password: _passwordController.text,
+        name: _nameController.text,
+      );
+
+      // auth().then((credential) {
+      //   register(credential)
+      //       .then((value) => navigatorController.goToProfile())
+      //       .onError((error, stackTrace) {
+      //     _showError(error);
+      //   });
+      // }).onError((error, stackTrace) {
+      //   _showError(error);
+      // });
     }
   }
 
@@ -62,19 +77,6 @@ class SignUpScreenControllerImpl extends SignUpScreenController {
 
   @override
   GlobalKey<FormState> get formKey => _formKey;
-
-  Future<UserCredential> auth() => authService.signUpUser(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-  Future<void> register(UserCredential credential) {
-    currentUser.update(
-      credential: credential,
-      name: _nameController.text,
-    );
-    return CDBService.updateUser();
-  }
 
   void _showError(Object? error) {
     error as FirebaseAuthException;
