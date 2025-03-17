@@ -45,18 +45,18 @@ class ProfileScreenControllerImpl extends ProfileScreenController {
   // TODO: Retornar esta future
   void onValidate() {
     if (_state) {
-      // currentUser.update(
-      //   status: status.text,
-      //   availabilityStatus: availability,
-      //   isNewUser: false,
-      // );
-      // CDBService.updateUser().then((value) {
-      //   navigatorController.goToChats();
-      // }).onError((error, stackTrace) {
-      //   error as FirebaseAuthException;
-      //   navigatorController.showSnackbar(error.message!);
-      //   navigatorController.goToChats();
-      // });
+      currentUser.update(
+        status: status.text,
+        availabilityStatus: availability,
+        isNewUser: false,
+      );
+      CDBService.updateUser().then((value) {
+        navigatorController.goToChats();
+      }).onError((error, stackTrace) {
+        error as FirebaseAuthException;
+        navigatorController.showSnackbar(error.message!);
+        navigatorController.goToChats();
+      });
     }
   }
 

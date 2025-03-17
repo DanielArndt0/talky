@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class SignInSocialScreenController {
   void initState();
-  void onUserValidation();
+  Future<void> onUserValidation();
   void onSignUpButtonPressed();
   void onForgotPasswordButtonPressed();
 

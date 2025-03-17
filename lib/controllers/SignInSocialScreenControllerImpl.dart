@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:talky_chat/Errors/AuthException.dart';
 import 'package:talky_chat/controllers/interfaces/NavigatorController.dart';
 import 'package:talky_chat/controllers/interfaces/SignInSocialScreenController.dart';
 import 'package:talky_chat/providers/CurrentUserProvider.dart';
@@ -31,26 +32,26 @@ class SignInSocialScreenControllerImpl extends SignInSocialScreenController {
 
   @override
   // TODO: Retornar esta future
-  void onUserValidation() {
+  Future<void> onUserValidation() async {
     if (_state) {
-      // authService
-      //     .signInUser(
-      //   email: _emailController.text,
-      //   password: _passwordController.text,
-      // )
-      //     .then((userCredential) {
-      //   currentUser.updateUserCredential(userCredential);
-      //   CDBService.refreshUser().then((user) {
-      //     if (currentUser.localUser.isNewUser) {
-      //       navigatorController.goToProfile();
-      //     } else {
-      //       navigatorController.goToChats();
-      //     }
-      //   });
-      // }).onError((error, stackTrace) {
-      //   error as FirebaseException;
-      //   navigatorController.showSnackbar(error.message!);
-      // });
+      try {
+        final UserCredential userCredential = await authService.signInUser(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        currentUser.updateUserCredential(userCredential);
+        await CDBService.refreshUser();
+
+        if (currentUser.localUser.isNewUser) {
+          navigatorController.goToProfile();
+        } else {
+          navigatorController.goToChats();
+        }
+      } catch (e) {
+        e as AuthException;
+        navigatorController.showSnackbar(e.message);
+      }
     }
   }
 

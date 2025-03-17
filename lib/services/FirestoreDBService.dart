@@ -10,7 +10,7 @@ class FirestoreDBService extends CloudDBService {
   FirestoreDBService({required this.currentUser});
 
   @override
-  Future<void> updateUser() {
+  Future<void> updateUser() async {
     return _firestore
         .collection('users')
         .doc(currentUser.userCredential!.user!.uid)

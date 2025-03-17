@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:talky_chat/Errors/AuthException.dart';
 import 'package:talky_chat/controllers/AuthControllerImpl.dart';
 import 'package:talky_chat/controllers/interfaces/NavigatorController.dart';
 import 'package:talky_chat/controllers/interfaces/SignUpScreenController.dart';
@@ -43,13 +44,20 @@ class SignUpScreenControllerImpl extends SignUpScreenController {
 
   @override
   // TODO: Retornar esta future
-  void onUserValidation() {
+  Future<void> onUserValidation() async {
     if (_state) {
-      authController.register(
-        email: _emailController.text,
-        password: _passwordController.text,
-        name: _nameController.text,
-      );
+      try {
+        await authController.register(
+          email: _emailController.text,
+          password: _passwordController.text,
+          name: _nameController.text,
+        );
+        navigatorController.goToProfile();
+      } on AuthException catch (e) {
+        navigatorController.showSnackbar(e.message);
+      } catch (e) {
+        navigatorController.showSnackbar(e.toString());
+      }
 
       // auth().then((credential) {
       //   register(credential)

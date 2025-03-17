@@ -17,7 +17,7 @@ class CurrentUserProvider extends ChangeNotifier {
     required UserCredential credential,
   }) {
     _user = localUser;
-    _userCredential = _userCredential;
+    _userCredential = credential;
   }
 
   void update({

@@ -55,12 +55,11 @@ class FirebaseAuthService extends AuthService {
     required String password,
   }) async {
     try {
-      final userCredential = await _auth.createUserWithEmailAndPassword(
+      return await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       // _userCredentialValidation(userCredential); TODO
-      return userCredential;
     } on FirebaseAuthException catch (e, s) {
       if (e.code == AuthErrorType.invalidEmail.code) {
         throw InvalidEmailException(stackTrace: s);
@@ -73,7 +72,7 @@ class FirebaseAuthService extends AuthService {
       } else {
         throw AuthException(
           code: e.code,
-          message: e.message ?? '',
+          message: e.message ?? 'AuthException',
           stackTrace: s,
         );
       }

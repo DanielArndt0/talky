@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 abstract class SignUpScreenController {
   void initState();
-  void onUserValidation();
+  Future<void> onUserValidation();
   void onSignUpButtonPressed();
 
   GlobalKey<FormState> get formKey;
